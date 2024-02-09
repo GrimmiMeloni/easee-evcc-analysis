@@ -35,9 +35,12 @@ sed \
   -e '/"device"/ s/"/'\''/g' \
   -e '/CommandResponse / s/.*CommandResponse \(........\):.*/commandresponse,\1,&/' >> $OUTPUT
 
-echo "done. Import into influx now via:"
-echo
-echo "export INFLUX_TOKEN=2-kbA15f2YQjk0_NEt91GxyQ1wutrdL8eqTnlbEhWc69SFdcXQbCKNQu5hoJh6c0rkIecVIeZTqGkHMe0Nemtg=="
-echo "influx write --host http://localhost:8086 --org mhess --bucket easee -f $OUTPUT"
+echo "done. Importing into influx now."
+podman-compose up -d
+export INFLUX_TOKEN=2-kbA15f2YQjk0_NEt91GxyQ1wutrdL8eqTnlbEhWc69SFdcXQbCKNQu5hoJh6c0rkIecVIeZTqGkHMe0Nemtg==
+influx write --host http://localhost:8086 --org grimmi --bucket easee -f $OUTPUT
 
-
+echo 
+echo "Stack spun up, data imported. Go to http://localhost:8086 to inspect"
+echo 
+echo "use podman-compose down to stop stack"
