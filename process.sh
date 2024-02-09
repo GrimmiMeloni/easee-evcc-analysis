@@ -28,7 +28,7 @@ cat $1 | \
 grep '\[easee' | \
 egrep 'POST https:\/\/api.easee.com\/api\/chargers\/........\/commands|\{"device"|CommandResponse' | \
 sed \
-  -e 's/^.*: \[easee \] TRACE //' \
+  -e 's/^.*\[easee \] TRACE //' \
   -e 's/^\(.\{19\}\) /\1,/' \
   -e '/api.easee.com\/api\/chargers\/\(........\)\// s/.*chargers\/\(........\)\/.*/apicall,\1,&/' \
   -e '/"device"/ s/.*"device":"\(........\)".*/apireply,\1,&/' \
